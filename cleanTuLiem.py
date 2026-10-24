@@ -2,6 +2,7 @@ import os
 import re
 import pandas as pd
 
+# Import các hàm xử lý văn bản có sẵn từ file crawl.py của bạn
 from crawl import OUT_DIR, norm_text
 from cleanup import looks_ambiguous
 from normalize import extract_features, is_dorm
@@ -10,8 +11,7 @@ from normalize import extract_features, is_dorm
 PRICE_MIN, PRICE_MAX = 1.2, 12.0     # triệu đồng/tháng
 AREA_MIN, AREA_MAX = 10.0, 65.0      # m2
 
-# Danh sách chuẩn các Quận/Huyện tại Hà Nội
-# (không có 'tu liem' chung chung; chỉ giữ 'bac tu liem' và 'nam tu liem')
+# Danh sách chuẩn các Quận/Huyện tại Hà Nội (đã bỏ 'tu liem' chung chung)
 HANOI_DISTRICTS = {
     "ba dinh", "hoan kiem", "tay ho", "long bien", "cau giay", "dong da",
     "hai ba trung", "hoang mai", "thanh xuan", "nam tu liem", "bac tu liem", "ha dong",
@@ -20,10 +20,56 @@ HANOI_DISTRICTS = {
     "soc son", "thach that", "thanh oai", "thanh tri", "thuong tin", "ung hoa"
 }
 
-# Nhãn quận chung chung, không phân biệt được Bắc/Nam -> loại bỏ
-DROP_DISTRICTS = {"tu liem"}
+# Từ khóa nhận diện Quận Bắc Từ Liêm (Phường, Đường, Trường ĐH lớn)
+BAC_TU_LIEM_KW = [
+    "bac tu liem", "co nhue", "xuan dinh", "xuan tao", "dong ngac", "duc thang",
+    "phu dien", "phuc dien", "minh khai", "lien mac", "thuy phuong", "tay tuu",
+    "thuong cat", "nguyen xa", "kieu mai", "van tien dung", "pham van dong",
+    "tran cung", "hoang tang bi", "ngoai giao doan", "thanh pho giao luu",
+    "hoc vien tai chinh", "hv tai chinh", "hvtc", "mo dia chat", "dh mo",
+    "dai hoc cong nghiep", "dh cong nghiep", "dhcn"
+]
 
+# Từ khóa nhận diện Quận Nam Từ Liêm (Phường, Đường, Khu đô thị)
+NAM_TU_LIEM_KW = [
+    "nam tu liem", "my dinh", "me tri", "phu do", "trung van", "dai mo", "tay mo",
+    "phuong canh", "xuan phuong", "dinh thon", "nhan my", "tan my", "mieu dam",
+    "le duc tho", "ham nghi", "nguyen co thach", "do duc duc", "chau van liem",
+    "luong the vinh", "phung khoang", "to huu", "keangnam", "smart city",
+    "ben xe my dinh", "bx my dinh", "svd my dinh", "ho tung mau", "cau dien"
+]
+def resolve_tu_liem(row):
+    """
+    Phân tách nhãn 'tu liem' thành 'bac tu liem' hoặc 'nam tu liem'
+    dựa trên cột street_address, title và text.
+    """
+    dist = str(row.get("district", "")).strip()
+    if dist != "tu liem":
+        return dist
 
+    # Ghép địa chỉ đường, tiêu đề và mô tả để dò từ khóa
+    search_text = norm_text(
+        f"{row.get('street_address', '')} {row.get('title', '')} {row.get('text', '')}"
+    )
+
+    # Đếm số từ khóa khớp của từng quận (ưu tiên địa chỉ đường và tiêu đề trước)
+    addr_title = norm_text(f"{row.get('street_address', '')} {row.get('title', '')}")
+    
+    for kw in BAC_TU_LIEM_KW:
+        if kw in addr_title:
+            return "bac tu liem"
+    for kw in NAM_TU_LIEM_KW:
+        if kw in addr_title:
+            return "nam tu liem"
+
+    # Nếu tiêu đề/địa chỉ không rõ, tìm tiếp trong toàn bộ mô tả
+    if any(kw in search_text for kw in BAC_TU_LIEM_KW):
+        return "bac tu liem"
+    if any(kw in search_text for kw in NAM_TU_LIEM_KW):
+        return "nam tu liem"
+
+    # Mặc định trả về 'nam tu liem' nếu tin không ghi rõ tên đường
+    return "nam tu liem"
 def extract_street_key(street_address, title):
     """Chuẩn hóa tên đường/ngõ để làm khóa lọc trùng kết hợp với Quận."""
     s = norm_text(street_address)
@@ -35,21 +81,17 @@ def extract_street_key(street_address, title):
     t = norm_text(title)
     m = re.search(r"\b(ngo\s+\d+\s*\w*|pho\s+\w+\s+\w+|duong\s+\w+\s+\w+)\b", t)
     return m.group(1) if m else ""
-
 def clean_hanoi_data(df_raw):
     df = df_raw.copy()
     log = [("thô ban đầu", len(df))]
-
     # 1. Bỏ trùng ID trong cùng 1 nguồn
     df = df.drop_duplicates(subset=["source", "post_id"])
     log.append(("bỏ trùng theo (source, post_id)", len(df)))
 
-    # 2. Bỏ các tin có district = 'tu liem' (chung chung), giữ 'bac tu liem' và 'nam tu liem'
-    mask_tu_liem = df["district"].astype(str).str.strip().isin(DROP_DISTRICTS)
-    print(f"-> Bỏ {int(mask_tu_liem.sum())} tin có district 'tu liem' chung chung "
-          f"(giữ nguyên bac tu liem / nam tu liem).")
-    df = df[~mask_tu_liem]
-    log.append(("bỏ district 'tu liem' chung chung", len(df)))
+    # 2. Tách 'tu liem' -> 'bac tu liem' hoặc 'nam tu liem' (CÁCH 1)
+    tu_liem_before = (df["district"] == "tu liem").sum()
+    df["district"] = df.apply(resolve_tu_liem, axis=1)
+    print(f"-> Đã phân tách {tu_liem_before} tin 'tu liem' về Bắc/Nam Từ Liêm.")
 
     # 3. Chỉ giữ dữ liệu thuộc Hà Nội
     df = df[df["city"] == "ha noi"]
@@ -121,5 +163,5 @@ if __name__ == "__main__":
         clean_df.to_csv(out_path, index=False, encoding="utf-8-sig")
         print(f"\nĐã cập nhật file sạch tại: {out_path}")
 
-        print("\nTin mỗi quận (Top 10):")
+        print("\nTin mỗi quận sau khi tách Từ Liêm (Top 10):")
         print(clean_df["district"].value_counts().head(10).to_string())
