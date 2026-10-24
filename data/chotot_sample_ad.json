@@ -1,0 +1,113 @@
+{
+  "account_id": 27673722,
+  "account_name": "Trần Thị Thuỷ",
+  "account_oid": "05c361892ba4b19b23722d57d1ad1ecd",
+  "ad_features": [],
+  "ad_id": 176813586,
+  "ad_labels": [],
+  "area": 80,
+  "area_name": "Quận Hoàng Mai",
+  "area_v2": 12080,
+  "avatar": "https://cdn.chotot.com/uac2/27673722",
+  "body": "Cho Thuê Phòng Trọ Kv Dương Văn Bé\nDiện Tích 18m2,vs khép kín,1 gác xép ***\nCó điều hoà,điện nước giá dân",
+  "business_days": [],
+  "category": 1050,
+  "category_name": "Phòng trọ",
+  "contain_videos": 2,
+  "cta_buttons": [],
+  "date": "6 phút trước",
+  "feature_params": {
+    "seo_structure": {
+      "items": [
+        {
+          "id": "size",
+          "label": "Diện tích",
+          "value": "18 m²"
+        }
+      ]
+    }
+  },
+  "fee_type": [],
+  "full_name": "Trần Thị Thuỷ",
+  "image": "https://cdn.chotot.com/roRrBQxXNxWERjiBTga-DmhtSmIrTZi_cXH8ovUaxXg/preset:listing/plain/e5d23a2abc4545dcc44f9c7ff809e3af-2989049254828206705.jpg",
+  "image_thumbnails": [
+    {
+      "image": "https://cdn.chotot.com/ZDhtXjsiEMC0LQ-2tNPBW_P37jBR1wfT1hQTMi6mdgA/preset:view/plain/e5d23a2abc4545dcc44f9c7ff809e3af-2989049254828206705.jpg",
+      "thumbnail": "https://cdn.chotot.com/roRrBQxXNxWERjiBTga-DmhtSmIrTZi_cXH8ovUaxXg/preset:listing/plain/e5d23a2abc4545dcc44f9c7ff809e3af-2989049254828206705.jpg"
+    },
+    {
+      "image": "https://cdn.chotot.com/Xwn6EyNrb5D7pGZ9HcUj5U06Jfrlg96LzTw-kAIRISs/preset:view/plain/d9bf0e29fa0017d78c1e2f1288c15873-2989049253871839857.jpg",
+      "thumbnail": "https://cdn.chotot.com/U4qMPXoB3uoKx6fa9oUa7oygWbqy7qBiTc0e5sQovcE/preset:listing/plain/d9bf0e29fa0017d78c1e2f1288c15873-2989049253871839857.jpg"
+    },
+    {
+      "image": "https://cdn.chotot.com/UQldG4Vuk7gRJSlyYdKqMdtRela9j11wEBP6adLa3Ik/preset:view/plain/081ee7292d4db4643fc791361f25116a-2989049255033030010.jpg",
+      "thumbnail": "https://cdn.chotot.com/Q7SZdNnm7xCWTA3G_QyAV6ZSy0cLlvTiboJgjmv2pAk/preset:listing/plain/081ee7292d4db4643fc791361f25116a-2989049255033030010.jpg"
+    },
+    {
+      "image": "https://cdn.chotot.com/F9yVMzPXDJF62HehbgKzUIzkCPGbkpmYlHzK0t5JgxQ/preset:view/plain/bbd57a03961eaf3f62e486ee0f28f586-2989049256135290105.jpg",
+      "thumbnail": "https://cdn.chotot.com/p2--3HiC3bUT9LnyaZwuGW_3rFBxBeKbP58mGjx0XmQ/preset:listing/plain/bbd57a03961eaf3f62e486ee0f28f586-2989049256135290105.jpg"
+    }
+  ],
+  "images": [
+    "https://cdn.chotot.com/ZDhtXjsiEMC0LQ-2tNPBW_P37jBR1wfT1hQTMi6mdgA/preset:view/plain/e5d23a2abc4545dcc44f9c7ff809e3af-2989049254828206705.jpg",
+    "https://cdn.chotot.com/Xwn6EyNrb5D7pGZ9HcUj5U06Jfrlg96LzTw-kAIRISs/preset:view/plain/d9bf0e29fa0017d78c1e2f1288c15873-2989049253871839857.jpg",
+    "https://cdn.chotot.com/UQldG4Vuk7gRJSlyYdKqMdtRela9j11wEBP6adLa3Ik/preset:view/plain/081ee7292d4db4643fc791361f25116a-2989049255033030010.jpg",
+    "https://cdn.chotot.com/F9yVMzPXDJF62HehbgKzUIzkCPGbkpmYlHzK0t5JgxQ/preset:view/plain/bbd57a03961eaf3f62e486ee0f28f586-2989049256135290105.jpg",
+    "https://cdn.chotot.com/XqGAFKHrSbsTkdrojZgWaxRLdTBOIhvcVpWfVfkj0m8/preset:view/plain/38c77a609d2d6372c6bdc79d617672a0-2989049256388553329.jpg"
+  ],
+  "inspection_images": [],
+  "is_price_not_valid": false,
+  "is_shop_verified": false,
+  "is_show_price_diff": true,
+  "is_sticky": false,
+  "is_zalo_show": false,
+  "job_tier": 0,
+  "label_campaigns": [],
+  "latitude": 20.989235,
+  "list_id": 133016138,
+  "list_time": 1792815382000,
+  "location": "20.9892354,105.8745359",
+  "longitude": 105.874535,
+  "number_of_images": 5,
+  "original_price": 2000000,
+  "original_price_string": "2 triệu/tháng",
+  "params": [],
+  "price": 2500000,
+  "price_diff": 500000,
+  "price_million_per_m2": 0.1388889,
+  "price_string": "2,5 triệu/tháng",
+  "protection_entitlement": false,
+  "pty_characteristics": [],
+  "pty_jupiter": 0,
+  "pty_map": "https://cdn.chotot.com/admincentre/location/20x9892354_105x8745359.jpg",
+  "pty_map_modifier": 0.0008,
+  "pty_map_v2": "https://cdn.chotot.com/admincentre/location/20x9892354_105x8745359_v2.jpg",
+  "pty_project_name": "",
+  "region": 12,
+  "region_name": "Hà Nội",
+  "region_name_v3": "TP Hà Nội",
+  "region_v2": 12000,
+  "seller_info": {
+    "avatar": "https://cdn.chotot.com/uac2/27673722",
+    "full_name": "Trần Thị Thuỷ",
+    "live_ads": 1
+  },
+  "size": 18,
+  "size_unit_string": "m²",
+  "special_display_images": [],
+  "specific_service_offered": [],
+  "state": "accepted",
+  "status": "active",
+  "sticky_ad_platinum": 0,
+  "street_name": "Phố Dương Văn Bé",
+  "street_number": "25 ngõ 107/3B/97",
+  "streetnumber_display": 1,
+  "subject": "Phòng trọ kv dương văn bé",
+  "thumbnail_image": "https://cdn.chotot.com/roRrBQxXNxWERjiBTga-DmhtSmIrTZi_cXH8ovUaxXg/preset:listing/plain/e5d23a2abc4545dcc44f9c7ff809e3af-2989049254828206705.jpg",
+  "type": "u",
+  "videos": [],
+  "ward": 105,
+  "ward_name": "Phường Vĩnh Hưng",
+  "ward_name_v3": "Phường Vĩnh Hưng",
+  "webp_image": "https://cdn.chotot.com/W2OQYLo3u0pB2pH6IU4KjrSPY5JBFsMvgDdFuRIdM0c/preset:listing/plain/e5d23a2abc4545dcc44f9c7ff809e3af-2989049254828206705.webp"
+}
